@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import Path
 import logging
 from os import environ
 from dotenv import load_dotenv
@@ -25,7 +26,17 @@ try:
   sudo_users = list(set(x for x in environ.get("SUDO_USERS", "999197022").split(";")))
   try:
     from_chats = list(set(int(x) for x in environ.get("FROM_CHATS").split()))
-    to_chats = list(set(int(x) for x in environ.get("TO_CHATS").split()))
+    to_chats = []
+
+    fle = Path("subscribed_ids.txt")
+    fle.touch(exist_ok=True)
+    
+    with open(file, 'r') as filehandle:
+        for line in filehandle:
+            # remove linebreak which is the last character of the string
+            sub_id = line[:-1]
+            # add item to the list
+            to_chats.append(int(sub_id))
   except Exception as e:
     from_chats = []
     to_chats = []
@@ -77,11 +88,10 @@ with app:
     LOG.info(f"from chat ids {from_chats}")
     LOG.info(f"chats data {chats_data}")
   else:
-    if len(to_chats) == 0 or len(from_chats) == 0:
-      LOG.error("Set either ADVANCE_CONFIG or FROM_CHATS and TO_CHATS")
+    if len(from_chats) == 0:
+      LOG.error("Set either ADVANCE_CONFIG or FROM_CHATS")
       sys.exit(1)
     else:
       from_chats = get_formatted_chats(from_chats, app)
-      to_chats = get_formatted_chats(to_chats, app)
       LOG.info(f"from chat ids {from_chats}")
       LOG.info(f"to chat ids {to_chats}")

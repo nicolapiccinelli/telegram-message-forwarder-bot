@@ -51,7 +51,7 @@ def subscribe(app, message):
     # store the new list of subscribers
     with open("subscribed_ids.txt", 'w') as filehandle:
     for listitem in to_chats:
-        filehandle.write('%d\n' % listitem)
+      filehandle.write('%d\n' % listitem)
     
     LOG.info(f"Subscription request {chat_id}")
     reply = message.reply_text("Inoltro dei messaggi attivato. Yeee!")

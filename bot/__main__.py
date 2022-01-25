@@ -44,7 +44,7 @@ def work(client, message):
 def subscribe(app, message):
   LOG.info("Subscription request received")
   try:
-    chat_id = message.sender_chat.id
+    chat_id = message.chat.id
     LOG.info(f"Subscription request {chat_id}")
     reply = message.reply_text("Yeee!")
   except Exception as e:

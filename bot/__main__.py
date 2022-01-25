@@ -47,10 +47,10 @@ def subscribe(app, message):
   LOG.info("Subscription request received")
   try:
     chat_id = message.chat.id
-    to_chats.append(int(chat_id))
     # remove duplicates
     if chat_id not in to_chats:
       # store the new list of subscribers
+      to_chats.append(int(chat_id))      
       with open("subscribed_ids.txt", 'w') as filehandle:
         for listitem in to_chats:
           filehandle.write('%d\n' % listitem)

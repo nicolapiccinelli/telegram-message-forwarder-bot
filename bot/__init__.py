@@ -31,7 +31,7 @@ try:
     fle = Path("subscribed_ids.txt")
     fle.touch(exist_ok=True)
     
-    with open(file, 'r') as filehandle:
+    with open(fle, 'r') as filehandle:
         for line in filehandle:
             # remove linebreak which is the last character of the string
             sub_id = line[:-1]

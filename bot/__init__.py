@@ -38,6 +38,7 @@ try:
             # add item to the list
             to_chats.append(int(sub_id))
   except Exception as e:
+    LOG.error(e)
     from_chats = []
     to_chats = []
   advance_config = environ.get("ADVANCE_CONFIG", None)

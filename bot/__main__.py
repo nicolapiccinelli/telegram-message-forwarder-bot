@@ -8,7 +8,7 @@ from bot.helper.utils import get_formatted_chat
 
 @app.on_message(filters.chat(from_chats) & filters.incoming)
 def work(client, message):
-    LOG.info("new message received")
+    LOG.info("new message received")        
     caption = None
     msg = None
     if remove_strings:
@@ -40,6 +40,12 @@ def work(client, message):
       except Exception as e:
         LOG.error(e)
 
+@app.on_message(filters.command(["start", "join", "subscribe"]), group=1)
+def subscribe(app, message):
+  chat_id = get_formatted_chat(message.command[1], app)
+  LOG.info(f"Subscription request {chat_id}")
+  reply = message.reply_text("Yeee!")
+  
 @app.on_message(filters.user(sudo_users) & filters.command(["fwd", "forward"]), group=1)
 def forward(app, message):
     if len(message.command) > 1:

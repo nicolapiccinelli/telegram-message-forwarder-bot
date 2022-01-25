@@ -42,9 +42,11 @@ def work(client, message):
 
 @app.on_message(filters.command(["start", "join", "subscribe"]), group=1)
 def subscribe(app, message):
-  chat_id = get_formatted_chat(message.command[1], app)
-  LOG.info(f"Subscription request {chat_id}")
-  reply = message.reply_text("Yeee!")
+  chat_entity = message.sender_chat;
+  if chat_entity:
+    chat_id = chat_entity.id
+    LOG.info(f"Subscription request {chat_id}")
+    reply = message.reply_text("Yeee!")
   
 @app.on_message(filters.user(sudo_users) & filters.command(["fwd", "forward"]), group=1)
 def forward(app, message):

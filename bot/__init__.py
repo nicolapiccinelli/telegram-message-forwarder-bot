@@ -72,8 +72,8 @@ with app:
         chats_data[f] = chat
       if not f in from_chats:
         from_chats.append(f)
-    LOG.info(from_chats)
-    LOG.info(chats_data)
+    LOG.info(f"from chat ids {from_chats}")
+    LOG.info(f"chats data {chats_data}")
   else:
     if len(to_chats) == 0 or len(from_chats) == 0:
       LOG.error("Set either ADVANCE_CONFIG or FROM_CHATS and TO_CHATS")

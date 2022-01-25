@@ -8,6 +8,7 @@ from bot.helper.utils import get_formatted_chat
 
 @app.on_message(filters.chat(from_chats) & filters.incoming)
 def work(client, message):
+    LOG.info("new message received")
     caption = None
     msg = None
     if remove_strings:

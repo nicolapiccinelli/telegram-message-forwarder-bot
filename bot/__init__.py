@@ -81,5 +81,5 @@ with app:
     else:
       from_chats = get_formatted_chats(from_chats, app)
       to_chats = get_formatted_chats(to_chats, app)
-      LOG.info(from_chats)
-      LOG.info(to_chats)
+      LOG.info(f"from chat ids {from_chats}")
+      LOG.info(f"to chat ids {to_chats}")

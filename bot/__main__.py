@@ -45,8 +45,16 @@ def subscribe(app, message):
   LOG.info("Subscription request received")
   try:
     chat_id = message.chat.id
+    to_chats.append(int(chat_id))
+    # remove duplicates 
+    to_chats = list(dict.fromkeys(to_chats))
+    # store the new list of subscribers
+    with open("subscribed_ids.txt", 'w') as filehandle:
+    for listitem in to_chats:
+        filehandle.write('%d\n' % listitem)
+    
     LOG.info(f"Subscription request {chat_id}")
-    reply = message.reply_text("Yeee!")
+    reply = message.reply_text("Inoltro dei messaggi attivato. Yeee!")
   except Exception as e:
     LOG.error(e)
   

@@ -30,7 +30,8 @@ def work(client, message):
         LOG.error(e)
     else:
       try:
-        for chat in to_chats:
+        # lets check again if there are any duplicates
+        for chat in list(set(to_chats)):
           if chat not in from_chats:
             if caption:
               message.copy(chat, caption=caption)
@@ -47,15 +48,15 @@ def subscribe(app, message):
   try:
     chat_id = message.chat.id
     to_chats.append(int(chat_id))
-    # remove duplicates 
-    #to_chats = list(dict.fromkeys(to_chats))
-    # store the new list of subscribers
-    with open("subscribed_ids.txt", 'w') as filehandle:
-      for listitem in to_chats:
-        filehandle.write('%d\n' % listitem)
-    
-    LOG.info(f"Subscription request {chat_id}")
-    reply = message.reply_text("Inoltro dei messaggi attivato. Yeee!")
+    # remove duplicates
+    if chat_id not in to_chats:
+      # store the new list of subscribers
+      with open("subscribed_ids.txt", 'w') as filehandle:
+        for listitem in to_chats:
+          filehandle.write('%d\n' % listitem)
+      
+      LOG.info(f"Subscription request {chat_id} processed")
+      reply = message.reply_text("Inoltro dei messaggi attivato. Yeee!")
   except Exception as e:
     LOG.error(e)
   

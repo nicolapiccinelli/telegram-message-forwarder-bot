@@ -66,4 +66,5 @@ def forward(app, message):
       sleep(20)
       reply.delete()
 
+LOG.info("starting bot")
 app.run()

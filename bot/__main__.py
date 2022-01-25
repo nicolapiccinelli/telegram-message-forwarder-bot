@@ -31,12 +31,13 @@ def work(client, message):
     else:
       try:
         for chat in to_chats:
-          if caption:
-            message.copy(chat, caption=caption)
-          elif msg:
-            app.send_message(chat, msg)
-          else:
-            message.copy(chat)
+          if chat not in from_chats:
+            if caption:
+              message.copy(chat, caption=caption)
+            elif msg:
+              app.send_message(chat, msg)
+            else:
+              message.copy(chat)
       except Exception as e:
         LOG.error(e)
 

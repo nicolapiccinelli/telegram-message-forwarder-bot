@@ -48,7 +48,7 @@ def subscribe(app, message):
     chat_id = message.chat.id
     to_chats.append(int(chat_id))
     # remove duplicates 
-    to_chats = list(dict.fromkeys(to_chats))
+    #to_chats = list(dict.fromkeys(to_chats))
     # store the new list of subscribers
     with open("subscribed_ids.txt", 'w') as filehandle:
       for listitem in to_chats:
